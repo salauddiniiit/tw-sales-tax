@@ -1,30 +1,32 @@
 package com.thoughtworks.billing.taxes;
 
-import com.thoughtworks.billing.bean.Billable;
-import com.thoughtworks.billing.bean.Category;
 import com.thoughtworks.billing.bean.Item;
+import com.thoughtworks.billing.taxes.criteria.ImportTaxCriteria;
+import com.thoughtworks.billing.taxes.criteria.SalesTaxCriteria;
+import com.thoughtworks.billing.util.MoneyFormatter;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.Format;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaxCalculator {
     final static BigDecimal TAX_FACTOR = new BigDecimal("0.05");
+    static List<TaxRule> rules = new ArrayList<TaxRule>();
+
+    static {
+        rules.add(new TaxRule(new SalesTaxCriteria(), new SalesTax()));
+        rules.add(new TaxRule(new ImportTaxCriteria(), new ImportDuty()));
+    }
 
     public static double applyTaxRules(Item item) {
-        Category category = item.getCategory();
-        boolean imported = item.isImported();
-        Billable taxable = item;
-
-        //TODO: create taxRate rules and create criteria to implement the rules. The rules can be used to do the taxation.
-        //Use Tax decorator. Each taxation has its own rules
-        if (imported) {
-            taxable = new ImportDuty(item);
+        Tax tax = new NoTax();
+        for (TaxRule rule : rules) {
+            if (rule.isApplicable(item)) {
+                tax.addTax(rule.getTax(item));
+            }
         }
-        if (!category.equals(Category.FOOD) && !category.equals(Category.BOOKS) && !category.equals(Category.MEDICINES)) {
-            taxable = new SalesTax(taxable);
-        }
-        return getTaxRoundOff(taxable.getTax());
+        double price = tax.getTaxRate() * item.getCost();
+        return getTaxRoundOff(price);
     }
 
     public static double getTaxRoundOff(double money) {
@@ -36,8 +38,6 @@ public class TaxCalculator {
     }
 
     public static double getTaxInDecimal(double money) {
-        Format format = new DecimalFormat("#.##");
-        return Double.parseDouble(format.format(money));
-        //return money.setScale(decimal, RoundingMode.HALF_DOWN);
+        return MoneyFormatter.twoDecimalFormat(money);
     }
 }

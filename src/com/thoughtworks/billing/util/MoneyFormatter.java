@@ -1,12 +1,11 @@
 package com.thoughtworks.billing.util;
 
-import java.text.DecimalFormat;
-import java.text.Format;
-
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MoneyFormatter {
     public static double twoDecimalFormat(double money) {
-        Format decimalFormat = new DecimalFormat("#.##");
-        return Double.valueOf(decimalFormat.format(money));
+        BigDecimal decimal = new BigDecimal(money);
+        return decimal.setScale(2, RoundingMode.HALF_DOWN).doubleValue();
     }
 }
