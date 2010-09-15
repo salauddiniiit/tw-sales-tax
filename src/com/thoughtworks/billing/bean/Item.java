@@ -51,24 +51,7 @@ public class Item {
         return category;
     }
 
-
-/*    public BigDecimal getTaxRate() {
-        BigDecimal taxAggregate = BigDecimal.ZERO;
-        for (Tax tax : taxes) {
-            taxAggregate = taxAggregate.add(tax.getTaxRate());
-        }
-        return TaxCalculator.getTaxInDecimal(taxAggregate, 2);
-    }
-
-    public BigDecimal getTax() {
-        return getTaxRate().multiply(getCost());
-    }*/
-
     public double getCost() {
         return cost;
     }
-
-/*    public BigDecimal getPrice() {
-        return getTaxRate().multiply(this.getCost()).add(this.getCost());
-    }*/
 }
