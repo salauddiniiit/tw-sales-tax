@@ -3,6 +3,7 @@ package com.thoughtworks.billing.service;
 import com.thoughtworks.billing.bean.Category;
 import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.bean.Packaging;
+import com.thoughtworks.billing.util.PrettyBillPrinter;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class BillingMachineTest extends TestCase {
 
         Bill bill = machine.generateBill();
 
-        //PrettyBillPrinter.printBill(bill);
+        PrettyBillPrinter.printBill(bill);
 
         assertEquals(1.50d, bill.getTotalTax());
         assertEquals(29.83, bill.getTotalPrice());
@@ -57,7 +58,7 @@ public class BillingMachineTest extends TestCase {
 
         Bill bill = machine.generateBill();
 
-//        PrettyBillPrinter.printBill(bill);
+        PrettyBillPrinter.printBill(bill);
 
         //values different from the example provided
         assertEquals(7.65, bill.getTotalTax());
@@ -76,9 +77,8 @@ public class BillingMachineTest extends TestCase {
 
         Bill bill = machine.generateBill();
 
-//        PrettyBillPrinter.printBill(bill);
+        PrettyBillPrinter.printBill(bill);
 
-        //values different from the example provided
         assertEquals(6.70, bill.getTotalTax());
         assertEquals(74.68, bill.getTotalPrice());
     }

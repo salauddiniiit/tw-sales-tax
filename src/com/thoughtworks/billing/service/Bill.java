@@ -35,4 +35,8 @@ public class Bill {
         }
         return MoneyFormatter.twoDecimalFormat(getTotalTax() + totalCost);
     }
+
+    public double getTax(Item item) {
+        return MoneyFormatter.twoDecimalFormat(TaxCalculator.applyTaxRules(item));
+    }
 }

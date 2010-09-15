@@ -1,4 +1,4 @@
-package com.thoughtworks.billing.taxes;
+package com.thoughtworks.billing.taxes.taxtypes;
 
 /**
  */
@@ -6,7 +6,7 @@ public class SalesTax extends Tax {
     final static double TAX_RATE = 0.10d;
 
     @Override
-    protected double getTaxRate() {
+    public double getTaxRate() {
         return super.getTaxRate() + TAX_RATE;
     }
 }

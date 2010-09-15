@@ -1,4 +1,4 @@
-package com.thoughtworks.billing.taxes;
+package com.thoughtworks.billing.taxes.taxtypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class Tax {
     List<Tax> addedTaxes = new ArrayList<Tax>();
 
-    protected double getTaxRate() {
+    public double getTaxRate() {
         double taxRate = 0.0d;
         for (Tax tax : addedTaxes) {
             taxRate += tax.getTaxRate();
@@ -14,7 +14,7 @@ public abstract class Tax {
         return taxRate;
     }
 
-    protected void addTax(Tax tax) {
+    public void addTax(Tax tax) {
         addedTaxes.add(tax);
     }
 }
