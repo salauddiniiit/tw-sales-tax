@@ -3,10 +3,8 @@ package com.thoughtworks.billing.service;
 import com.thoughtworks.billing.bean.Category;
 import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.bean.Packaging;
-import com.thoughtworks.billing.util.PrettyBillPrinter;
 import junit.framework.TestCase;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class BillingMachineTest extends TestCase {
         biller.buyItem(new Item("perfume", 27.99, Category.COSMETICS, Packaging.BOTTLE, true));
         Bill bill = biller.generateBill();
 
-        assertEquals(new BigDecimal("32.19"), bill.getTotalPrice());
+        assertEquals(32.19d, bill.getTotalPrice());
     }
 
 
@@ -29,7 +27,7 @@ public class BillingMachineTest extends TestCase {
         Biller biller = BillingMachine.getMachine();
         biller.buyItem(new Item("Book", 10.00, Category.BOOKS, Packaging.NONE));
         Bill bill = biller.generateBill();
-        assertEquals(new BigDecimal("10.00"), bill.getTotalPrice());
+        assertEquals(10.00d, bill.getTotalPrice());
     }
 
     public void testLocalItems() throws Exception {
@@ -45,8 +43,8 @@ public class BillingMachineTest extends TestCase {
 
         //PrettyBillPrinter.printBill(bill);
 
-        assertEquals("1.50", bill.getTotalTax().toString());
-        assertEquals("29.83", bill.getTotalPrice().toString());
+        assertEquals(1.50d, bill.getTotalTax());
+        assertEquals(29.83, bill.getTotalPrice());
     }
 
     public void testImported() throws Exception {
@@ -62,8 +60,8 @@ public class BillingMachineTest extends TestCase {
 //        PrettyBillPrinter.printBill(bill);
 
         //values different from the example provided
-        assertEquals("7.65", bill.getTotalTax().toString());
-        assertEquals("65.15", bill.getTotalPrice().toString());
+        assertEquals(7.65, bill.getTotalTax());
+        assertEquals(65.15, bill.getTotalPrice());
     }
 
     public void testMixOfItems() throws Exception {
@@ -81,7 +79,7 @@ public class BillingMachineTest extends TestCase {
 //        PrettyBillPrinter.printBill(bill);
 
         //values different from the example provided
-        assertEquals("6.70", bill.getTotalTax().toString());
-        assertEquals("74.68", bill.getTotalPrice().toString());
+        assertEquals(6.70, bill.getTotalTax());
+        assertEquals(74.68, bill.getTotalPrice());
     }
 }

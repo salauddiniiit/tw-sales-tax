@@ -1,13 +1,11 @@
 package com.thoughtworks.billing.taxes;
 
-import java.math.BigDecimal;
-
 /**
  */
 public class SalesTax extends Tax {
-    final static BigDecimal TAX_RATE = new BigDecimal(0.10);
+    final static double TAX_RATE = 0.10d;
 
-    public BigDecimal lookupTaxRate() {
+    public double lookupTaxRate() {
         return TAX_RATE;
     }
 }
