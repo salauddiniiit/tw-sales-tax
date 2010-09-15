@@ -1,7 +1,6 @@
 package com.thoughtworks.billing.bean;
 
 /**
- *
  * @see Item
  */
 public enum Packaging {

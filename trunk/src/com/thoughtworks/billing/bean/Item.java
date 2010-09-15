@@ -54,8 +54,4 @@ public class Item implements Billable {
     public double getCost() {
         return cost;
     }
-
-    public double getTax() {
-        return 0;
-    }
 }

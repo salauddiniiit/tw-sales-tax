@@ -1,7 +1,12 @@
 package com.thoughtworks.billing.taxes;
 
-import java.math.BigDecimal;
+/**
+ */
+public class NoTax extends Tax {
+    double TAX_RATE = 0.0d;
 
-public class NoTax extends TaxCalculator{
-    final BigDecimal TAX_RATE = BigDecimal.ZERO;
+    @Override
+    protected double getTaxRate() {
+        return super.getTaxRate() + TAX_RATE;
+    }
 }

@@ -23,7 +23,7 @@ public class PrettyBillPrinter {
         for (Item item : bill.listSoldItems()) {
             System.out.println(MessageFormat.format(print_format, "1",
                     item.isImported() ? "imported" : "", item.getPackaging(),
-                    item.getDescription(), format.format(bill.getTotalTax())));
+                    item.getDescription(), format.format(item.getCost())));
         }
 
         System.out.println("Sales Taxes: " + format.format(bill.getTotalTax()));
