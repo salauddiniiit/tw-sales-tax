@@ -3,7 +3,7 @@ package com.thoughtworks.billing.bean;
 /**
  *
  */
-public class Item {
+public class Item implements Billable {
     Category category = Category.OTHERS;
     Packaging packaging = Packaging.NONE;
     String description;
@@ -53,5 +53,9 @@ public class Item {
 
     public double getCost() {
         return cost;
+    }
+
+    public double getTax() {
+        return 0;
     }
 }
