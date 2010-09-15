@@ -31,6 +31,8 @@ public class BillingMachine implements Biller {
     }
 
     public Bill generateBill() {
-        return new Bill(UUID.randomUUID().toString(), items);
+        Bill bill = new Bill(UUID.randomUUID().toString(), new ArrayList<Item>(items));
+        items = new ArrayList<Item>();
+        return bill;
     }
 }
