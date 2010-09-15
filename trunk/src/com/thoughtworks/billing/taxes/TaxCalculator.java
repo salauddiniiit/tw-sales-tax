@@ -3,6 +3,10 @@ package com.thoughtworks.billing.taxes;
 import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.taxes.criteria.ImportTaxCriteria;
 import com.thoughtworks.billing.taxes.criteria.SalesTaxCriteria;
+import com.thoughtworks.billing.taxes.taxtypes.ImportDuty;
+import com.thoughtworks.billing.taxes.taxtypes.NoTax;
+import com.thoughtworks.billing.taxes.taxtypes.SalesTax;
+import com.thoughtworks.billing.taxes.taxtypes.Tax;
 import com.thoughtworks.billing.util.MoneyFormatter;
 
 import java.math.BigDecimal;

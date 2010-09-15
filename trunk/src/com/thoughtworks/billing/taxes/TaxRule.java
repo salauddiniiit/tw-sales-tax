@@ -2,6 +2,7 @@ package com.thoughtworks.billing.taxes;
 
 import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.taxes.criteria.Criteria;
+import com.thoughtworks.billing.taxes.taxtypes.Tax;
 
 public class TaxRule {
     final Criteria<Item> criteria;
