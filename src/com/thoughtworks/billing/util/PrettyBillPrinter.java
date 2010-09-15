@@ -1,7 +1,7 @@
 package com.thoughtworks.billing.util;
 
+import com.thoughtworks.billing.bean.Bill;
 import com.thoughtworks.billing.bean.Item;
-import com.thoughtworks.billing.service.Bill;
 
 import java.text.DecimalFormat;
 import java.text.Format;

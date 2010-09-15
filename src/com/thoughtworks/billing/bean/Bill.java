@@ -1,6 +1,5 @@
-package com.thoughtworks.billing.service;
+package com.thoughtworks.billing.bean;
 
-import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.taxes.TaxCalculator;
 import com.thoughtworks.billing.util.MoneyFormatter;
 
