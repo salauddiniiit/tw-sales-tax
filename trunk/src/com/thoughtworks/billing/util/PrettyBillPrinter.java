@@ -12,7 +12,7 @@ public class PrettyBillPrinter {
     final static Format moneyFormatter = new DecimalFormat("##.##");
 
     public static void printBill(Bill bill) {
-        System.out.println("Input:");
+        System.out.println("\n\nInput:");
         for (Item item : bill.listSoldItems()) {
             System.out.println(MessageFormat.format(print_format, "1",
                     item.isImported() ? "imported" : "", item.getPackaging(),

@@ -14,7 +14,12 @@ public class BillingMachine implements Biller {
 
     }
 
-    static Biller getMachine() {
+    //TODO: this can be made better. Why do we need a machine? Should state be managed here?
+    //TODO: Create new exception
+    static Biller getMachine() throws UnsupportedOperationException {
+        if (machine.items.size() > 0) {
+            throw new UnsupportedOperationException();
+        }
         machine.items = new ArrayList<Item>();
         return machine;
     }
