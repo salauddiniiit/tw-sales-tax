@@ -7,6 +7,7 @@ import com.thoughtworks.billing.util.MoneyFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: Fix quantity of items and its calculations
 public class Bill {
     List<Item> items = new ArrayList<Item>();
     String billNo = null;
@@ -38,5 +39,9 @@ public class Bill {
 
     public double getTax(Item item) {
         return MoneyFormatter.twoDecimalFormat(TaxCalculator.applyTaxRules(item));
+    }
+
+    public double getPrice(Item item) {
+        return MoneyFormatter.twoDecimalFormat(item.getCost() + getTax(item));
     }
 }

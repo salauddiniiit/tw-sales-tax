@@ -7,7 +7,6 @@ import com.thoughtworks.billing.taxes.taxtypes.ImportDuty;
 import com.thoughtworks.billing.taxes.taxtypes.NoTax;
 import com.thoughtworks.billing.taxes.taxtypes.SalesTax;
 import com.thoughtworks.billing.taxes.taxtypes.Tax;
-import com.thoughtworks.billing.util.MoneyFormatter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,10 +37,6 @@ public class TaxCalculator {
         value = value.divide(TAX_FACTOR);
         value = new BigDecimal(Math.ceil(value.doubleValue()));
         value = value.multiply(TAX_FACTOR);
-        return getTaxInDecimal(value.doubleValue());
-    }
-
-    public static double getTaxInDecimal(double money) {
-        return MoneyFormatter.twoDecimalFormat(money);
+        return value.doubleValue();
     }
 }
