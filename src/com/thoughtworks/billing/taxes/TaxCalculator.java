@@ -4,35 +4,47 @@ import com.thoughtworks.billing.bean.Category;
 import com.thoughtworks.billing.bean.Item;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.Format;
 
 public class TaxCalculator {
-    public static BigDecimal lookupTaxRate(Item item) {
+    final static BigDecimal TAX_FACTOR = new BigDecimal("0.05");
+
+    public static double lookupTaxRate(Item item) {
+        double taxRate = 0.0d;
         Category category = item.getCategory();
         boolean imported = item.isImported();
-        
-        //TODO: create tax rules and create criteria to implement the rules. The rules can be used to do the taxation.
+
+        //TODO: create taxRate rules and create criteria to implement the rules. The rules can be used to do the taxation.
         //Use Tax decorator. Each taxation has its own rules
         if (imported) {
-            item.addTax(new ImportDuty());
+            taxRate += new ImportDuty().lookupTaxRate();
         }
         if (!category.equals(Category.FOOD) && !category.equals(Category.BOOKS) && !category.equals(Category.MEDICINES)) {
-            item.addTax(new SalesTax());
+            taxRate += new SalesTax().lookupTaxRate();
         }
 
-        BigDecimal priceAfterTax = item.getTaxRate().multiply(item.getPrice());
-        return getTaxRoundOff(priceAfterTax, 2);
+        double tax = taxRate * item.getCost();
+        return getTaxRoundOff(tax);
     }
 
-    public static BigDecimal getTaxRoundOff(BigDecimal money, int decimal) {
-        money = money.setScale(2, RoundingMode.HALF_DOWN);
-        if (!money.divideAndRemainder(BigDecimal.ONE)[1].equals(BigDecimal.ZERO) && money.divideAndRemainder(BigDecimal.ONE)[1].compareTo(new BigDecimal(0.5)) > 0) {
-            money = new BigDecimal(Math.ceil(money.doubleValue() * 20) / 20);
-        }
-        return getTaxInDecimal(money, decimal);
+    public static double getTaxRoundOff(double money) {
+        BigDecimal value = new BigDecimal(money);
+        value = value.divide(TAX_FACTOR);
+        value = new BigDecimal(Math.ceil(value.doubleValue()));
+        value = value.multiply(TAX_FACTOR);
+
+//        money = Math.ceil((money.TAX_FACTOR) / TAX_FACTOR);
+        //TODO: convert only the which are lesser than closest 0.05
+//        if (!money.divideAndRemainder(BigDecimal.ONE)[1].equals(BigDecimal.ZERO) && money.divideAndRemainder(BigDecimal.ONE)[1].compareTo(new BigDecimal(0.5)) > 0) {
+//          money = Math.ceil(money * TAX_FACTOR) / TAX_FACTOR;
+//        }
+        return getTaxInDecimal(value.doubleValue());
     }
 
-    public static BigDecimal getTaxInDecimal(BigDecimal money, int decimal) {
-        return money.setScale(decimal, RoundingMode.HALF_DOWN);
+    public static double getTaxInDecimal(double money) {
+        Format format = new DecimalFormat("#.##");
+        return Double.parseDouble(format.format(money));
+        //return money.setScale(decimal, RoundingMode.HALF_DOWN);
     }
 }

@@ -1,12 +1,5 @@
 package com.thoughtworks.billing.bean;
 
-import com.thoughtworks.billing.taxes.Tax;
-import com.thoughtworks.billing.taxes.TaxCalculator;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  */
@@ -14,7 +7,7 @@ public class Item {
     Category category = Category.OTHERS;
     Packaging packaging = Packaging.NONE;
     String description;
-    BigDecimal price;
+    double cost;
     boolean imported;
 
     public Item(String description, double price) {
@@ -30,14 +23,14 @@ public class Item {
     }
 
 
-    public Item(String description, double price, Category category, Packaging packaging, boolean imported) {
+    public Item(String description, double cost, Category category, Packaging packaging, boolean imported) {
         this.description = description;
         this.category = category;
         this.packaging = packaging;
-        this.price = new BigDecimal(price);
+        this.cost = cost;
         this.imported = imported;
     }
-    
+
     public boolean isImported() {
         return imported;
     }
@@ -58,8 +51,8 @@ public class Item {
         return category;
     }
 
-/*
-    public BigDecimal getTaxRate() {
+
+/*    public BigDecimal getTaxRate() {
         BigDecimal taxAggregate = BigDecimal.ZERO;
         for (Tax tax : taxes) {
             taxAggregate = taxAggregate.add(tax.getTaxRate());
@@ -68,15 +61,14 @@ public class Item {
     }
 
     public BigDecimal getTax() {
-        return getTaxRate().multiply(getPrice());
-    }
-*/
+        return getTaxRate().multiply(getCost());
+    }*/
 
-    public BigDecimal getPrice() {
-        return price;
+    public double getCost() {
+        return cost;
     }
 
-/*    public BigDecimal getPriceAfterTax() {
-        return getTaxRate().multiply(getPrice()).add(getPrice());
+/*    public BigDecimal getPrice() {
+        return getTaxRate().multiply(this.getCost()).add(this.getCost());
     }*/
 }

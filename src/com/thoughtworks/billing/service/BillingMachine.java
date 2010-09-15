@@ -3,7 +3,6 @@ package com.thoughtworks.billing.service;
 import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.taxes.TaxCalculator;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,7 +13,6 @@ public class BillingMachine implements Bill, Biller {
     Logger log = Logger.getLogger("BillingMachine");
 
     private List<Item> items = new ArrayList<Item>();
-    private TaxCalculator tax = new TaxCalculator();
 
     private BillingMachine() {
 
@@ -46,21 +44,19 @@ public class BillingMachine implements Bill, Biller {
         return new ArrayList<Item>(items);
     }
 
-    public BigDecimal getTotalTax() {
-        BigDecimal tax = BigDecimal.ZERO;
+    public double getTotalTax() {
+        double tax = 0.0d;
         for (Item item : items) {
-            tax = tax.add(TaxCalculator.lookupTaxRate(item));
+            tax += TaxCalculator.lookupTaxRate(item);
         }
-        return TaxCalculator.getTaxInDecimal(tax, 2);
+        return tax;
     }
 
-    public BigDecimal getTotalPrice() {
-        BigDecimal price = new BigDecimal(0.0);
+    public double getTotalPrice() {
+        double totalCost = 0.0d;
         for (Item item : items) {
-            price = price.add(item.getPrice());
+            totalCost += item.getCost();
         }
-
-        price = price.add(getTotalTax());
-        return TaxCalculator.getTaxInDecimal(price, 2);
+        return getTotalTax() + totalCost;
     }
 }
