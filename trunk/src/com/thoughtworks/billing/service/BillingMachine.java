@@ -2,6 +2,7 @@ package com.thoughtworks.billing.service;
 
 import com.thoughtworks.billing.bean.Item;
 import com.thoughtworks.billing.taxes.TaxCalculator;
+import com.thoughtworks.billing.util.MoneyFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class BillingMachine implements Bill, Biller {
         for (Item item : items) {
             tax += TaxCalculator.lookupTaxRate(item);
         }
-        return tax;
+        return MoneyFormatter.twoDecimalFormat(tax);
     }
 
     public double getTotalPrice() {
@@ -57,6 +58,6 @@ public class BillingMachine implements Bill, Biller {
         for (Item item : items) {
             totalCost += item.getCost();
         }
-        return getTotalTax() + totalCost;
+        return MoneyFormatter.twoDecimalFormat(getTotalTax() + totalCost);
     }
 }
