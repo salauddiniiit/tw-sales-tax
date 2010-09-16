@@ -11,6 +11,7 @@ public class PrettyBillPrinter {
     final static String print_format = "{0} {1} {2} {3} at {4}";
     final static Format moneyFormatter = new DecimalFormat("##.##");
 
+
     public static void printBill(Bill bill) {
         System.out.println("\n\nInput:");
         for (Item item : bill.listSoldItems()) {

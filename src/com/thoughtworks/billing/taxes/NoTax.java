@@ -1,9 +1,10 @@
-package com.thoughtworks.billing.taxes.taxtypes;
+package com.thoughtworks.billing.taxes;
 
 /**
  */
 public class NoTax extends Tax {
     double TAX_RATE = 0.0d;
+
 
     @Override
     public double getTaxRate() {

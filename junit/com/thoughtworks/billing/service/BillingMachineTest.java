@@ -16,8 +16,9 @@ public class BillingMachineTest extends TestCase {
         super.setUp();
     }
 
+
     public void testSingleImportedItem() throws Exception {
-        Biller biller = BillingMachine.getMachine();
+        Biller biller = new BillingMachine();
         biller.buyItem(new Item("perfume", 27.99, Category.COSMETICS, Packaging.BOTTLE, true));
         Bill bill = biller.generateBill();
 
@@ -26,11 +27,12 @@ public class BillingMachineTest extends TestCase {
 
 
     public void testSingleNonTaxableItem() throws Exception {
-        Biller biller = BillingMachine.getMachine();
+        Biller biller = new BillingMachine();
         biller.buyItem(new Item("Book", 10.00, Category.BOOKS, Packaging.NONE));
         Bill bill = biller.generateBill();
         assertEquals(10.00d, bill.getTotalPrice());
     }
+
 
     public void testLocalItems() throws Exception {
         List<Item> items = new ArrayList<Item>();
@@ -38,7 +40,7 @@ public class BillingMachineTest extends TestCase {
         items.add(new Item("music CD", 14.99));
         items.add(new Item("chocolate bar", 0.85, Category.FOOD));
 
-        Biller machine = BillingMachine.getMachine();
+        Biller machine = new BillingMachine();
         machine.buyItems(items);
 
         Bill bill = machine.generateBill();
@@ -49,12 +51,13 @@ public class BillingMachineTest extends TestCase {
         assertEquals(29.83, bill.getTotalPrice());
     }
 
+
     public void testImported() throws Exception {
         List<Item> items = new ArrayList<Item>();
         items.add(new Item("Chocolates", 10.00, Category.FOOD, Packaging.PACKET, true));
         items.add(new Item("perfume", 47.50, Category.OTHERS, Packaging.BOTTLE, true));
 
-        Biller machine = BillingMachine.getMachine();
+        Biller machine = new BillingMachine();
         machine.buyItems(items);
 
         Bill bill = machine.generateBill();
@@ -66,6 +69,7 @@ public class BillingMachineTest extends TestCase {
         assertEquals(65.15, bill.getTotalPrice());
     }
 
+
     public void testMixOfItems() throws Exception {
         List<Item> items = new ArrayList<Item>();
         items.add(new Item("perfume", 27.99, Category.COSMETICS, Packaging.BOTTLE, true));
@@ -73,7 +77,7 @@ public class BillingMachineTest extends TestCase {
         items.add(new Item("headache pills", 9.75, Category.MEDICINES, Packaging.PACKET));
         items.add(new Item("chocolates", 11.25, Category.FOOD, Packaging.BOX, true));
 
-        Biller machine = BillingMachine.getMachine();
+        Biller machine = new BillingMachine();
         machine.buyItems(items);
 
         Bill bill = machine.generateBill();

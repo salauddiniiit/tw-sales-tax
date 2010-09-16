@@ -10,9 +10,11 @@ public enum Packaging {
     NONE("");
     String description;
 
+
     Packaging(String description) {
         this.description = description;
     }
+
 
     String getDescription() {
         return description;

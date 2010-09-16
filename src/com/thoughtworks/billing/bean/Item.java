@@ -1,7 +1,7 @@
 package com.thoughtworks.billing.bean;
 
 /**
- *
+ * A billable item which can be bought by a customer.
  */
 public class Item implements Billable {
     Category category = Category.OTHERS;
@@ -10,13 +10,16 @@ public class Item implements Billable {
     double cost;
     boolean imported;
 
+
     public Item(String description, double price) {
         this(description, price, Category.OTHERS);
     }
 
+
     public Item(String description, double price, Category category) {
         this(description, price, category, Packaging.NONE);
     }
+
 
     public Item(String description, double price, Category category, Packaging packaging) {
         this(description, price, category, packaging, false);
@@ -31,9 +34,11 @@ public class Item implements Billable {
         this.imported = imported;
     }
 
+
     public boolean isImported() {
         return imported;
     }
+
 
     public String getPackaging() {
         if (!packaging.equals(Packaging.NONE)) {
@@ -43,13 +48,16 @@ public class Item implements Billable {
         }
     }
 
+
     public String getDescription() {
         return description;
     }
 
+
     public Category getCategory() {
         return category;
     }
+
 
     public double getCost() {
         return cost;
