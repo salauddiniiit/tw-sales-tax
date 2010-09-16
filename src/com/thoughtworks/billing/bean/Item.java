@@ -42,7 +42,7 @@ public class Item implements Billable {
 
     public String getPackaging() {
         if (!packaging.equals(Packaging.NONE)) {
-            return packaging.getDescription() + " of ";
+            return packaging.getDescription() + " of";
         } else {
             return packaging.getDescription();
         }
