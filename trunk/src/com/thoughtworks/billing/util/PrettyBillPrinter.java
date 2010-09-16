@@ -9,7 +9,7 @@ import java.text.MessageFormat;
 
 public class PrettyBillPrinter {
     final static String print_format = "{0} {1} {2} {3} at {4}";
-    final static Format moneyFormatter = new DecimalFormat("##.##");
+    final static Format moneyFormatter = new DecimalFormat("0.00");
 
 
     public static void printBill(Bill bill) {
